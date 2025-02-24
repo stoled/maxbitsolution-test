@@ -21,7 +21,6 @@ const cocktailCodes = ref(COCKTAIL_CODES)
 <style lang="scss" scoped>
 nav {
   padding: 2rem;
-  width: 300px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
