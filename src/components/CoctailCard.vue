@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-// import LazyImage from './LazyImage.vue'
+import LazyImage from './LazyImage.vue'
 import type { Cocktail, Ingredient } from '../types'
 import getIngridients from '@/utils/getIngridients'
 
@@ -8,9 +8,9 @@ interface Props {
   cocktail: Cocktail
 }
 
-const props = defineProps<Props>()
+const { cocktail } = defineProps<Props>()
 
-const ingredients = computed<Ingredient[]>(() => getIngridients(props.cocktail))
+const ingredients = computed<Ingredient[]>(() => getIngridients(cocktail))
 </script>
 
 <template>
@@ -38,7 +38,7 @@ const ingredients = computed<Ingredient[]>(() => getIngridients(props.cocktail))
       </div>
     </div>
 
-    <!-- <LazyImage :src="cocktail.strDrinkThumb" :alt="cocktail.strDrink" :height="200" /> -->
+    <LazyImage :src="cocktail.strDrinkThumb" :alt="cocktail.strDrink" />
   </div>
 </template>
 
