@@ -16,7 +16,7 @@ export interface Cocktail {
   strInstructionsZH_HANS: string | null
   strInstructionsZH_HANT: string | null
   strDrinkThumb: string
-  [key: string]: string | null // For strIngredientN and strMeasureN
+  [key: string]: string | null
 }
 
 export interface Ingredient {

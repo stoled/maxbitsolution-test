@@ -18,10 +18,6 @@ const cocktails = computed<Cocktail[]>(() => {
   return store.getCocktailsByType(props.type)
 })
 
-const capitalizedType = computed<string>(() => {
-  return props.type.charAt(0).toUpperCase() + props.type.slice(1)
-})
-
 const fetchCocktails = async (): Promise<void> => {
   if (store.hasLoadedType(props.type)) {
     return
@@ -53,8 +49,6 @@ watch(
 
 <template>
   <div class="cocktail-list">
-    <h2>{{ capitalizedType }} Cocktails</h2>
-
     <div v-if="loading" class="loading">Loading cocktails...</div>
 
     <div v-else-if="error" class="error">

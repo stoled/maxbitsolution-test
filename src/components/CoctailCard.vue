@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 // import LazyImage from './LazyImage.vue'
 import type { Cocktail, Ingredient } from '../types'
+import getIngridients from '@/utils/getIngridients'
 
 interface Props {
   cocktail: Cocktail
@@ -9,46 +10,74 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const ingredients = computed<Ingredient[]>(() => {
-  const result: Ingredient[] = []
-  for (let i = 1; i <= 15; i++) {
-    const name = props.cocktail[`strIngredient${i}`]
-    const measure = props.cocktail[`strMeasure${i}`]
-
-    if (name) {
-      result.push({
-        name,
-        measure: measure ? measure.trim() : null,
-      })
-    }
-  }
-  return result
-})
+const ingredients = computed<Ingredient[]>(() => getIngridients(props.cocktail))
 </script>
 
 <template>
   <div class="cocktail-card">
-    <!-- <LazyImage :src="cocktail.strDrinkThumb" :alt="cocktail.strDrink" :height="200" /> -->
     <div class="cocktail-info">
       <h3>{{ cocktail.strDrink }}</h3>
-      <p class="category"><span class="label">Category:</span> {{ cocktail.strCategory }}</p>
-      <p class="glass"><span class="label">Glass:</span> {{ cocktail.strGlass }}</p>
-
-      <div class="ingredients">
-        <h4>Ingredients:</h4>
-        <ul>
-          <template v-for="(ingredient, index) in ingredients">
-            <li :key="index" v-if="ingredient.name">
-              {{ ingredient.name }}: {{ ingredient.measure || 'to taste' }}
-            </li>
-          </template>
-        </ul>
-      </div>
+      <p>{{ cocktail.strCategory }}</p>
+      <p>{{ cocktail.strAlcoholic }}</p>
+      <p>{{ cocktail.strGlass }}</p>
 
       <div class="instructions">
         <h4>Instructions:</h4>
         <p>{{ cocktail.strInstructions }}</p>
       </div>
+
+      <div class="ingredients">
+        <h4>List of ingredients:</h4>
+        <ul>
+          <template v-for="(ingredient, index) in ingredients">
+            <li :key="index" v-if="ingredient.name">
+              {{ ingredient.measure }} : {{ ingredient.name }}
+            </li>
+          </template>
+        </ul>
+      </div>
     </div>
+
+    <!-- <LazyImage :src="cocktail.strDrinkThumb" :alt="cocktail.strDrink" :height="200" /> -->
   </div>
 </template>
+
+<style lang="scss">
+.cocktail-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.01);
+    border-color: green;
+  }
+
+  .cocktail-info {
+    flex: 1;
+
+    .instructions,
+    .ingredients {
+      margin-top: 10px;
+
+      ul {
+        list-style: none;
+        padding-left: 20px;
+      }
+    }
+  }
+
+  .cocktail-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+</style>
