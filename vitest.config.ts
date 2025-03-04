@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, URL } from 'node:url'
 import { mergeConfig, defineConfig, configDefaults } from 'vitest/config'
 import viteConfig from './vite.config'
 
@@ -9,13 +9,6 @@ export default mergeConfig(
       environment: 'jsdom',
       exclude: [...configDefaults.exclude, 'e2e/**'],
       root: fileURLToPath(new URL('./', import.meta.url)),
-    },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@import "@/assets/base.scss";',
-        },
-      },
     },
   }),
 )
