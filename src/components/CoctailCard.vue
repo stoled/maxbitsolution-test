@@ -50,12 +50,11 @@ const ingredients = computed<Ingredient[]>(() => getIngridients(cocktail))
   padding: 20px;
   margin-bottom: 20px;
   border: 1px solid #fff;
-  border-radius: 10px;
+  border-radius: 4px;
   transition: 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.01);
-    border-color: green;
+    border-color: $green;
   }
 
   .cocktail-info {
