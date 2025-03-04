@@ -31,6 +31,10 @@ nav {
 
     li {
       margin-bottom: 4px;
+
+      .router-link-active {
+        color: $green;
+      }
     }
   }
 }
