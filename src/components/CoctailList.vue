@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
-import { useCocktailsStore } from '@/stores/coctails'
+import { onMounted, watch, toRefs } from 'vue'
+import { useCocktailsStore } from '@/stores/coctailsStore'
 import CocktailCard from './CoctailCard.vue'
 import type { Cocktail } from '@/types'
 
@@ -9,42 +9,25 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const { type } = toRefs(props)
 
-const store = useCocktailsStore()
-const loading = ref<boolean>(false)
-const error = ref<string | null>(null)
+const { getCocktailsByType, fetchCocktailsByType, loading, error } = useCocktailsStore()
 
-const cocktails = computed<Cocktail[]>(() => {
-  return store.getCocktailsByType(props.type)
-})
+const cocktails = (): Cocktail[] => {
+  return getCocktailsByType(type.value)
+}
 
-const fetchCocktails = async (): Promise<void> => {
-  if (store.hasLoadedType(props.type)) {
-    return
-  }
-
-  loading.value = true
-  error.value = null
-
-  try {
-    await store.fetchCocktailsByType(props.type)
-  } catch (err) {
-    error.value = `Failed to load cocktails: ${err instanceof Error ? err.message : String(err)}`
-  } finally {
-    loading.value = false
-  }
+const fetchCocktails = async () => {
+  await fetchCocktailsByType(type.value)
 }
 
 onMounted(() => {
   fetchCocktails()
 })
 
-watch(
-  () => props.type,
-  () => {
-    fetchCocktails()
-  },
-)
+watch(type, () => {
+  fetchCocktails()
+})
 </script>
 
 <template>
@@ -55,10 +38,8 @@ watch(
       {{ error }}
     </div>
 
-    <div v-else-if="!cocktails.length" class="no-results">No cocktails found for "{{ type }}".</div>
-
     <div v-else class="cocktails-container">
-      <CocktailCard v-for="cocktail in cocktails" :key="cocktail.idDrink" :cocktail="cocktail" />
+      <CocktailCard v-for="cocktail in cocktails()" :key="cocktail.idDrink" :cocktail="cocktail" />
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getCocktailsByCode } from '@/api/coctails'
+import { useCoctailsService } from '@/services/coctailsService'
 import type { Cocktail, CocktailsState } from '@/types'
 
 export const useCocktailsStore = defineStore('cocktails', {
@@ -15,25 +15,17 @@ export const useCocktailsStore = defineStore('cocktails', {
       (type: string): Cocktail[] => {
         return state.cocktails[type] || []
       },
-    hasLoadedType:
-      (state) =>
-      (type: string): boolean => {
-        return !!state.cocktails[type]
-      },
   },
 
   actions: {
     async fetchCocktailsByType(type: string): Promise<Cocktail[]> {
-      // Skip if already loaded
-      if (this.cocktails[type]) {
-        return this.cocktails[type]
-      }
+      const cocktailsService = useCoctailsService()
 
       this.loading = true
       this.error = null
 
       try {
-        const drinks = await getCocktailsByCode(type)
+        const drinks = await cocktailsService.getCocktailsByCode(type)
         this.cocktails[type] = drinks
         return drinks
       } catch (error) {
