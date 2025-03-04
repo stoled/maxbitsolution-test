@@ -19,6 +19,10 @@ export const useCocktailsStore = defineStore('cocktails', {
 
   actions: {
     async fetchCocktailsByType(type: string): Promise<Cocktail[]> {
+      if (this.cocktails[type]) {
+        return this.cocktails[type]
+      }
+
       const cocktailsService = useCoctailsService()
 
       this.loading = true
