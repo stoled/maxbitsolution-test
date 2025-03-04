@@ -20,10 +20,11 @@ const cocktailCodes = ref(COCKTAIL_CODES)
 
 <style lang="scss" scoped>
 nav {
-  padding: 32px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex-grow: 0;
 
   ul {
     list-style-type: none;

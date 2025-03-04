@@ -12,7 +12,7 @@ import NavBar from '@/components/NavBar.vue'
 
 <style scoped>
 main {
-  padding: 2rem;
+  padding: 10px;
   flex-grow: 1;
 }
 </style>
