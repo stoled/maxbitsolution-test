@@ -13,5 +13,6 @@ import NavBar from '@/components/NavBar.vue'
 <style scoped>
 main {
   padding: 2rem;
+  flex-grow: 1;
 }
 </style>
