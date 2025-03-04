@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 import { COCKTAIL_CODES } from '@/constatnts/constants'
 
-import CocktailView from '@/views/CocktailView.vue'
-import NotFound from '@/views/NotFound.vue'
+const CocktailView = () => import('@/views/CocktailView.vue')
+const NotFound = () => import('@/views/NotFound.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
