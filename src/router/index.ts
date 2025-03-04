@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import { COCKTAIL_CODES } from '@/utils/constants'
+import { COCKTAIL_CODES } from '@/constatnts/constants'
 
 import CocktailView from '@/views/CocktailView.vue'
 import NotFound from '@/views/NotFound.vue'

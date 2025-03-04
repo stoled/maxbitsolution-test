@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { ref } from 'vue'
-import { COCKTAIL_CODES } from '@/utils/constants'
+import { capitalize, ref } from 'vue'
+import { COCKTAIL_CODES } from '@/constatnts/constants'
 
 const cocktailCodes = ref(COCKTAIL_CODES)
 </script>
@@ -11,7 +11,7 @@ const cocktailCodes = ref(COCKTAIL_CODES)
     <ul class="menu">
       <li v-for="code in cocktailCodes" :key="code">
         <router-link :to="{ name: 'cocktail', params: { type: code } }">
-          {{ code.charAt(0).toUpperCase() + code.slice(1) }}
+          {{ capitalize(code) }}
         </router-link>
       </li>
     </ul>
