@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import LazyImage from './LazyImage.vue'
-import type { Cocktail, Ingredient } from '../types'
+import VLazyImage from 'v-lazy-image'
 import getIngridients from '@/utils/getIngridients'
+import type { Cocktail, Ingredient } from '../types'
 
 interface Props {
   cocktail: Cocktail
@@ -38,14 +38,13 @@ const ingredients = computed<Ingredient[]>(() => getIngridients(cocktail))
       </div>
     </div>
 
-    <LazyImage :src="cocktail.strDrinkThumb" :alt="cocktail.strDrink" />
+    <v-lazy-image :src="cocktail.strDrinkThumb" height="200" />
   </div>
 </template>
 
 <style lang="scss">
 .cocktail-card {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 10px;
   padding: 20px;
