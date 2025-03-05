@@ -1,4 +1,7 @@
-@import '@/assets/variables.scss';
+$white: #ffffff;
+$black: #181818;
+$green: #00bd7e;
+$dark-green: #00885b;
 
 * {
   margin: 0;
@@ -45,8 +48,4 @@ a {
   color: $dark-green;
   text-decoration: none;
   transition: color 0.4s ease;
-
-  &:hover {
-    color: darken($green, 20%);
-  }
 }
