@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { onMounted, watch, toRefs } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useCocktailsStore } from '@/stores/coctailsStore'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import CocktailCard from './CoctailCard.vue'
 import type { Cocktail } from '@/types'
 
-interface Props {
-  type: string
-}
-
-const props = defineProps<Props>()
-const { type } = toRefs(props)
+const route = useRoute()
+const type = computed<string>(() => route.params.type as string)
 
 const { getCocktailsByType, fetchCocktailsByType, loading, error } = useCocktailsStore()
 

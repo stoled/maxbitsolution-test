@@ -10,7 +10,7 @@ import NavBar from '@/components/NavBar.vue'
   </main>
 </template>
 
-<style scoped>
+<style lang="scss">
 main {
   padding: 10px;
   flex-grow: 1;

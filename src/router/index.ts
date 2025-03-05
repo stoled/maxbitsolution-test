@@ -15,7 +15,7 @@ const router = createRouter({
       path: '/cocktail/:type',
       name: 'cocktail',
       component: CocktailView,
-      beforeEnter: (to, from, next) => {
+      beforeEnter: (to, _, next) => {
         const type = to.params.type as string
         if (COCKTAIL_CODES.includes(type)) {
           next()

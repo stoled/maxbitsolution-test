@@ -38,7 +38,11 @@ const ingredients = computed<Ingredient[]>(() => getIngridients(cocktail))
       </div>
     </div>
 
-    <v-lazy-image :src="cocktail.strDrinkThumb" height="200" />
+    <v-lazy-image
+      :src="cocktail.strDrinkThumb"
+      alt="props.cocktail.strDrink"
+      class="cocktail-image"
+    />
   </div>
 </template>
 
@@ -74,8 +78,7 @@ const ingredients = computed<Ingredient[]>(() => getIngridients(cocktail))
   .cocktail-image {
     width: 200px;
     height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
+    border-radius: 4px;
   }
 }
 </style>

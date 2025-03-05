@@ -21,6 +21,7 @@ const getIngridients = (cocktail: Cocktail) => {
       })
     }
   }
+
   return result
 }
 
